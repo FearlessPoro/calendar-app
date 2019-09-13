@@ -9,6 +9,9 @@ tr {
 
 .calendar-container {
     border: 2px solid skyblue;
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
 }
 
 .calendar {
@@ -42,6 +45,9 @@ tr {
 .day {
     font-size: 0.8em;
 }
+.day:hover {
+    color: red;
+}
 
 .day {
     cursor: pointer;
@@ -52,9 +58,9 @@ tr {
 
 .current-day {
     background-color: #4285f4;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
     border-radius: 2%;
     color: white;
 }
@@ -68,10 +74,11 @@ tr {
 }
 
 .month-popup {
-    position: absolute;
     padding: 5px;
     background: white;
     border: 2px solid skyblue;
+
+    position: absolute;
 }
 
 .month-popup div {
@@ -79,25 +86,33 @@ tr {
 }
 
 .nav-month {
-    position: absolute;
     top: 0.6em;
     font-size: 0.6em;
     right:3px;
 }
 
-.prev {
+
+.prev:hover{
+    color: red;
 }
 
-.next {
+.next:hover {
+    color: red;
 }
 
 .editor-year {
     max-width: 3.6em;
+    font-size: 0.6em;
 }
 
 .label-month,
 .label-year {
     font-size: 0.6em;
+}
+
+.label-month:hover,
+.label-year:hover {
+    color: red;
 }
 
 .label-month {

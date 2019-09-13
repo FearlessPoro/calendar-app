@@ -8,7 +8,7 @@ export default class Calendar extends React.Component {
         today: moment(),
         showMonthPopup: false,
         showYearPopup: false,
-        selectedDay: moment()
+        selectedDay: moment(),
     };
 
     constructor (props) {
@@ -37,7 +37,7 @@ export default class Calendar extends React.Component {
         let popup = props.data.map ( (data) => {
             return (
                 <div key={data}>
-                    <a href="#" onClick={(e) => {this.onSelectChange(e, data)} }>
+                    <a href="#" onClick={(e) => {this.onSelectChange(e, data)} } className="month-link">
                         {data}
                     </a>
                 </div>
@@ -174,7 +174,7 @@ export default class Calendar extends React.Component {
                                 {" "}
                                 <this.YearNav/>
                             </td>
-                            <td colSpan="2" className="nav-month">
+                            <td colSpan="2" className="nav-month-left">
                                 <i className="prev fa fa-fw fa-chevron-left"
                                 onClick={ () => {this.nextMonth()}}>
                                 </i>
@@ -216,7 +216,7 @@ export default class Calendar extends React.Component {
     };
 
     currentDay = () => {
-        return this.state.dateObject.format("D");
+        return this.state.selectedDay
     };
 
     firstDayOfMonth = () => {
@@ -247,15 +247,19 @@ export default class Calendar extends React.Component {
 
     onDayClick = (e, day) => {
         this.props.onDayClick && this.props.onDayClick(e, day);
+        this.setState({
+            selectedDay: day
+        })
     };
+
 
     createDaysInMonth() {
         let daysInMonth = [];
         for (let day = 1; day <= this.daysInMonth(); day++) {
             let className = (day == this.currentDay() ? "day current-day" : "day");
             daysInMonth.push(
-                <td key={day} className={className}>
-                    <span onClick={ (e) => {this.onDayClick(e, day) }}>{day}</span>
+                <td key={day} className={className} onClick={ (e) => {this.onDayClick(e, day) }}>
+                    <span>{day}</span>
                 </td>
             )
         }
