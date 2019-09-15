@@ -3,6 +3,7 @@ package com.calendarapp.calendarapp.controller;
 import com.calendarapp.calendarapp.repository.EventRepository;
 import com.calendarapp.calendarapp.Model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -17,9 +18,6 @@ public class EventsController {
     @Autowired
     EventRepository repository;
 
-//    public String saveEvent(@RequestBody EventUI event) {
-//        repository.save(new Event(event.getTimestamp()))
-//    }
     @GetMapping("/EventsList")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Event> findAll() {
@@ -32,21 +30,24 @@ public class EventsController {
         Date startDate = null;
         Date endDate = null;
         try {
-            startDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date + " 00:00");
-            endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(date + " 24:00");
+            startDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(date + " 00:00:00");
+            endDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").parse(date + " 23:59:00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        assert startDate != null;
         assert endDate != null;
-        return repository.findAllByTimestampBetween(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()));
+        return repository.findAllByTimestampGreaterThanEqualAndTimestampLessThanEqual(new Timestamp(startDate.getTime()), new Timestamp(endDate.getTime()));
     }
 
     @PostMapping("/SaveEvent")
-    public void  set(@RequestParam("Timestamp") String timestamp, @RequestParam("Title") String title, @RequestParam("info") String info) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void  set(@RequestParam("timestamp") String timestamp, @RequestParam("title") String title, @RequestParam("info") String info) {
         Event event = new Event();
         event.setInfo(info);
         event.setTitle(title);
         event.setTimestamp(Timestamp.valueOf(timestamp));
+        event.setUser_ID(1);
         repository.save(event);
 
     }

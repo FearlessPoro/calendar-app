@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./events.css"
 
 export default class Event extends React.Component{
     state = {
@@ -17,11 +17,11 @@ export default class Event extends React.Component{
 
             boxes.push(
                 <div className="event-box" key={i}>
-                    <table className="events">
+                    <table className="event-table">
                         <thead>
                         <tr>
                             <td>{this.state.time[i]}</td>
-                            <td>{this.state.title[i]}</td>
+                            <td className="title">{this.state.title[i]}</td>
                         </tr>
                         </thead>
                         <tbody>

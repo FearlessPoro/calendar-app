@@ -1,3 +1,20 @@
-.events {
+.event-box {
+    border: 3px solid orange;
+    width: 40%;
+    margin: 5%;
+    margin-top: 10px;
+    float: right;
+    position: relative;
+}
 
+.event-table {
+    width: 100%;
+}
+td {
+    text-align: left;
+
+}
+
+.title {
+    font-weight: bold;
 }

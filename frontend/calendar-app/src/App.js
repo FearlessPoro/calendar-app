@@ -21,19 +21,14 @@ class App extends React.Component{
             selectedDay: day
         })
     };
-    //
-    // onDayChangeToggle = (e) => {
-    //
-    // }
 
     render() {
         return (
             <div className="App">
               <Calendar style={style} width="302px"
                 onDayClick={(e, day) => this.onDayClick(e, day)} />
-                <NewEventForm/>
-                <Event selectedDay={this.state.selectedDay}
-                />
+                <NewEventForm selectedDay={this.state.selectedDay}/>
+                <Event selectedDay={this.state.selectedDay}/>
             </div>
         );
     }

@@ -12,6 +12,6 @@ import java.util.List;
 @Transactional
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAll();
-    List<Event> findAllByTimestampBetween(Timestamp startDate, Timestamp endDate);
+    List<Event> findAllByTimestampGreaterThanEqualAndTimestampLessThanEqual(Timestamp startDate, Timestamp endDate);
 
 }
