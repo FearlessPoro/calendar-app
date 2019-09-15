@@ -3,23 +3,18 @@ import React from "react";
 
 export default class Event extends React.Component{
     state = {
-        time: ["16:00", "12:00"],
-        title: ["pyszne", "boogie"],
-        info: ["amam", "oogie"]
+        selectedDayChange: false,
+        time: [],
+        title: [],
+        info: []
     };
-
-    constructor(props) {
-        super(props);
-        // this.setState({
-        //     time: props.time,
-        //     title: props.title,
-        //     info: props.info
-        // })
-    }
 
     Divs = () => {
         let boxes = [];
+        this.fetchData();
+
         for (let i=0; i<this.state.time.length; i++) {
+
             boxes.push(
                 <div className="event-box" key={i}>
                     <table className="events">
@@ -42,6 +37,30 @@ export default class Event extends React.Component{
         }
         return boxes;
     };
+
+
+    fetchData() {
+        fetch('http://localhost:8080/EventsOn/' + this.props.selectedDay.format('YYYY-MM-DD')).then(
+            results => {
+                return results.json();
+            }
+        ).then(data => {
+            let times = [];
+            let titles = [];
+            let infos = [];
+            for (let i = 0; i < data.length; i++) {
+                const time = new Date(data[i].timestamp).toLocaleTimeString();
+                times.push(time);
+                titles.push(data[0].title);
+                infos.push(data[0].info);
+            }
+            this.setState({
+                time: times,
+                title: titles,
+                info: infos
+            });
+        });
+    }
 
     render() {
         return (

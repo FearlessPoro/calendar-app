@@ -3,6 +3,7 @@ import './App.css';
 import Calendar from './Components/Calendar/index';
 import NewEventForm from "./Components/NewEventForm";
 import Event from "./Components/Event";
+import moment from "moment";
 
 const style = {
     position: "relative",
@@ -11,9 +12,19 @@ const style = {
 
 class App extends React.Component{
 
-    onDayClick = (e, day) => {
-        console.info(day);
+    state = {
+        selectedDay: moment()
     };
+
+    onDayClick = (e, day) => {
+        this.setState({
+            selectedDay: day
+        })
+    };
+    //
+    // onDayChangeToggle = (e) => {
+    //
+    // }
 
     render() {
         return (
@@ -21,7 +32,8 @@ class App extends React.Component{
               <Calendar style={style} width="302px"
                 onDayClick={(e, day) => this.onDayClick(e, day)} />
                 <NewEventForm/>
-                <Event/>
+                <Event selectedDay={this.state.selectedDay}
+                />
             </div>
         );
     }

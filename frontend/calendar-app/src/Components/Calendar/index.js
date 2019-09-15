@@ -8,7 +8,7 @@ export default class Calendar extends React.Component {
         today: moment(),
         showMonthPopup: false,
         showYearPopup: false,
-        selectedDay: moment(),
+        selectedDay: moment()
     };
 
     constructor (props) {
@@ -246,17 +246,19 @@ export default class Calendar extends React.Component {
     };
 
     onDayClick = (e, day) => {
-        this.props.onDayClick && this.props.onDayClick(e, day);
+        let newDay = moment();
+        newDay.set("date", day).set("month", this.month()).set("year", this.year());
         this.setState({
-            selectedDay: day
+            selectedDay: newDay
         })
+        this.props.onDayClick && this.props.onDayClick(e, newDay);
     };
 
 
     createDaysInMonth() {
         let daysInMonth = [];
         for (let day = 1; day <= this.daysInMonth(); day++) {
-            let className = (day == this.currentDay() ? "day current-day" : "day");
+            let className = (day == this.currentDay().format("DD") ? "day current-day" : "day");
             daysInMonth.push(
                 <td key={day} className={className} onClick={ (e) => {this.onDayClick(e, day) }}>
                     <span>{day}</span>

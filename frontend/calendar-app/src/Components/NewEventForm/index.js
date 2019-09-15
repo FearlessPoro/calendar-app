@@ -7,17 +7,14 @@ export default class NewEventForm extends React.Component{
         text: null
     };
 
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         return(
           <div className="event-box">
+              <h3>Create new event:</h3>
               <form>
                   <label>
-                      Time: <input type="text" name="time"/>
+                      Time: <input type="time" name="time" required/>
                   </label>
                   <label>
                       Title: <input type="text" name="title"/>
