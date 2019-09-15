@@ -18,7 +18,6 @@ export default class Calendar extends React.Component {
     }
 
 
-    // TODO: Below should probably be a separate component
     setMonth = (month) => {
         let monthNo = this.months.indexOf(month);
         let dateObject = Object.assign({}, this.state.dateObject);
@@ -62,8 +61,6 @@ export default class Calendar extends React.Component {
      );
     };
 
-    // <- up to here
-    //TODO: another one here
     YearNav = () => {
         return(
             this.state.showYearPopup ?

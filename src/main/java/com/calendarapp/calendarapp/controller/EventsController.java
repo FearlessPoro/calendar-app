@@ -1,9 +1,8 @@
 package com.calendarapp.calendarapp.controller;
 
-import com.calendarapp.calendarapp.repository.EventRepository;
 import com.calendarapp.calendarapp.Model.Event;
+import com.calendarapp.calendarapp.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
